@@ -18,7 +18,7 @@ const SearchContainer = styled.View`
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
-    padding: 20,
+    padding: 10,
   },
 })`
   margin-bottom: ${(props) => props.theme.space[5]};

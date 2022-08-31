@@ -27,7 +27,7 @@ export const RestaurantsContextProvider = ({ children }) => {
   useEffect(() => {
     retrieveRestaurants();
   }, []);
-  console.log(restaurants);
+  /*   console.log(restaurants); */
   return (
     <RestaurantsContext.Provider value={{ restaurants, isLoading, error }}>
       {children}

@@ -1,19 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useContext } from "react";
-import { FlatList, SafeAreaView, ScrollView } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { FlatList, SafeAreaView, View } from "react-native";
+import { ActivityIndicator, Colors, Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
-import { RestaurantCard } from "../components/restaurant-info-card-styles";
+import { Spacer } from "../../../components/spacer/spacer.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
-import { Spacer } from "../../../components/spacer/spacer.component";
-
+import { Search } from "../components/search.component";
 const SafeArea = styled(SafeAreaView)`
   margintop: ${StatusBar.currentHeight}px;
-`;
-
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
 `;
 
 const RestaurantList = styled(FlatList).attrs({
@@ -23,13 +18,27 @@ const RestaurantList = styled(FlatList).attrs({
 })`
   margin-bottom: ${(props) => props.theme.space[5]};
 `;
+
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+const Loadingcontainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
+
 export const RestaurantsScreen = () => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+
   return (
     <SafeArea>
-      <SearchContainer>
-        <Searchbar placeholder="Search Here" />
-      </SearchContainer>
+      {isLoading && (
+        <Loadingcontainer>
+          <Loading size={50} animating={true} color={Colors.blue300} />
+        </Loadingcontainer>
+      )}
+      <Search />
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => {

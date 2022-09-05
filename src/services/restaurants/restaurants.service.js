@@ -2,7 +2,7 @@ import { mockImages, mocks } from "./mock";
 import camelize from "camelize";
 import { Rating } from "../../features/restaurants/components/restaurant-info-card-styles";
 
-export const restaurantsRequest = (location = "41.878113,-87.629799") => {
+export const restaurantsRequest = (location) => {
   return new Promise((resolve, reject) => {
     const mock = mocks[location];
     if (!mock) {

@@ -20,6 +20,7 @@ import { RestaurantsContextProvider } from "./src/services/restaurants/restauran
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SafeArea } from "./src/components/utility/safe-area.component";
+import { Navigation } from "./src/infrastructure/navigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -54,6 +55,7 @@ const createScreenOptions = ({ route }) => {
       {
         display: "flex",
       },
+      null,
     ],
   };
 };
@@ -75,19 +77,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantsContextProvider>
-            <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={createScreenOptions}
-                tabBarOptions={{
-                  ActiveTintColor: "tomato",
-                  InactiveTintColor: "gray",
-                }}
-              >
-                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-                <Tab.Screen name="Map" component={Map} />
-                <Tab.Screen name="Settings" component={Settings} />
-              </Tab.Navigator>
-            </NavigationContainer>
+            <Navigation />
           </RestaurantsContextProvider>
         </LocationContextProvider>
       </ThemeProvider>
